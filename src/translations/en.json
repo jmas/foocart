@@ -1,0 +1,11 @@
+{
+    "count": "Count",
+    "price": "Price",
+    "addItem": "Add",
+    "removeItem": "Remove",
+    "close": "Close",
+    "makeOrder": "Make Order",
+    "approveOrder": "Approve Order",
+    "orderCompleted": "Your order accepted!",
+    "nothingHere": "Nothing here."
+}

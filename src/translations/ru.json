@@ -1,0 +1,11 @@
+{
+    "count": "Количество",
+    "price": "Цена",
+    "addItem": "Добавить",
+    "removeItem": "Убрать",
+    "close": "Закрыть",
+    "makeOrder": "Оформить заказ",
+    "approveOrder": "Подтвердить заказ",
+    "orderCompleted": "Ваш заказ успешно принят!",
+    "nothingHere": "Ничего нет."
+}
