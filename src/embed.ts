@@ -4,7 +4,7 @@ import render from './render';
 import { fetchTranslation, createOrderResult, makeGScriptRequest } from './helpers';
 import Cart from './cart';
 
-export default function embed(completeUrl: string, id: string = 'foocart', props?: IProps): Promise<ICart> {
+export default function embed(id: string = 'foocart', props?: IProps): Promise<ICart> {
     // prepare element
     const element = (document.getElementById(id) || document.createElement('div')) as HTMLElement;
     if (!element.id) {
@@ -16,6 +16,11 @@ export default function embed(completeUrl: string, id: string = 'foocart', props
     const translationId = element.dataset.translation || 'en';
     // eslint-disable-next-line no-template-curly-in-string
     const priceTemplate = element.dataset.priceTemplate || '${price}';
+    const completeUrl = element.dataset.completeUrl || '';
+
+    if (!completeUrl) {
+        throw new Error('foocart: Please provide data-complete-url attribute!');
+    }
     
     // prepare translation
     return fetchTranslation(translationId)
