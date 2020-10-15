@@ -1,6 +1,6 @@
 {
   "name": "foocart",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "module": "dist/index.es.js",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
+  "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
     "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
