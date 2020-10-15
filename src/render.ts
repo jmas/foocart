@@ -1,5 +1,5 @@
-import { ICart, IOrder, IOutput, ITranslation, OrderItemIDType, SectionType } from './types';
 import { html, render as litRender } from 'lit-html';
+import { ICart, IOrder, IOutput, ITranslation, OrderItemIDType, SectionType, IFieldProps, ITextFieldProps, ITextareaFieldProps } from './types';
 
 export default function render(cart: ICart, output: IOutput, translation: ITranslation, element: HTMLElement, priceTemplate: string) {
     function handleAddItemClick(id: OrderItemIDType) {
@@ -33,7 +33,8 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
             name: formData.get('name'),
             surname: formData.get('surname'),
             email: formData.get('email'),
-            telephone: formData.get('telephone')
+            telephone: formData.get('telephone'),
+            comment: formData.get('comment')
         } as IOrder);
     }
 
@@ -70,7 +71,36 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
             <button type="button" @click=${handleCloseClick}>${translation.close}</button>
         ` : cart.section === SectionType.ORDER ? html`
             <form @submit=${handleOrderSubmit}>
-                <button type="submit" ?disabled=${output.orderResult.pending}>${translation.approveOrder} (${formatPrice(output.totalPrice)})</button>
+                ${output.orderResult.message ? html`<div>${output.orderResult.message}</div>` : null}
+                ${textField({
+                    label: translation.name,
+                    name: 'name',
+                    error: output.orderResult.errors?.name
+                })}
+                ${textField({
+                    label: translation.surname,
+                    name: 'surname',
+                    error: output.orderResult.errors?.surname
+                })}
+                ${textField({
+                    label: translation.telephone,
+                    name: 'telephone',
+                    type: 'tel',
+                    error: output.orderResult.errors?.telephone
+                })}
+                ${textField({
+                    label: translation.email,
+                    name: 'email',
+                    error: output.orderResult.errors?.email
+                })}
+                ${textareaField({
+                    label: translation.comment,
+                    name: 'comment',
+                    error: output.orderResult.errors?.comment
+                })}
+                <button type="submit" ?disabled=${output.orderResult.pending}>
+                    ${translation.approveOrder} (${formatPrice(output.totalPrice)})
+                </button>
             </form>
             <button type="button" @click=${handleCloseClick}>${translation.close}</button>
         ` : cart.section === SectionType.COMPLETE ? html`
@@ -80,4 +110,28 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
             <button type="button" @click=${handleCloseClick}>${translation.close}</button>
         ` : null}
     `, element);
+}
+
+function field(props: IFieldProps) {
+    return html`
+        <div>
+            <label>${props.label}</label>
+            ${props.input}
+            ${props.error ? html`<div>${props.error}</div>` : null}
+        </div>
+    `;
+}
+
+function textField(props: ITextFieldProps) {
+    return field({
+        ...props,
+        input: html`<input type=${props.type || 'text'} name=${props.name} />`
+    });
+}
+
+function textareaField(props: ITextareaFieldProps) {
+    return field({
+        ...props,
+        input: html`<textarea name=${props.name}></textarea>`
+    });
 }

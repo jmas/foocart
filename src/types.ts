@@ -1,3 +1,5 @@
+import { TemplateResult } from 'lit-html';
+
 export type OrderItemIDType = string | number;
 
 export enum SectionType {
@@ -64,3 +66,16 @@ export interface ICart {
   setSection(section: SectionType): void,
   getTotalPrice(): number
 };
+
+export interface IFieldProps {
+  label: string,
+  name: string,
+  input?: TemplateResult,
+  error?: string
+};
+
+export interface ITextFieldProps extends IFieldProps {
+  type?: string
+};
+
+export interface ITextareaFieldProps extends IFieldProps {};

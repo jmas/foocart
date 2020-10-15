@@ -7,5 +7,10 @@
     "makeOrder": "Оформить заказ",
     "approveOrder": "Подтвердить заказ",
     "orderCompleted": "Ваш заказ успешно принят!",
-    "nothingHere": "Ничего нет."
+    "nothingHere": "Ничего нет.",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "telephone": "Телефон",
+    "email": "Email",
+    "comment": "Комментарий"
 }

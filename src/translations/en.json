@@ -7,5 +7,10 @@
     "makeOrder": "Make Order",
     "approveOrder": "Approve Order",
     "orderCompleted": "Your order accepted!",
-    "nothingHere": "Nothing here."
+    "nothingHere": "Nothing here.",
+    "name": "Name",
+    "surname": "Surname",
+    "telephone": "Telephone",
+    "email": "Email",
+    "comment": "Comment"
 }
