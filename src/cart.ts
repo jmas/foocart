@@ -1,5 +1,5 @@
-import { ICart, IProps, IOrderItem, IOrderResult, SectionType, OrderItemIDType, IOrder } from './types';
-import { createOrderResult } from './helpers';
+import { ICart, IProps, IOrderItem, IOrderItemUnnormalized, IOrderResult, SectionType, OrderItemIDType, IOrder } from './types';
+import { createOrderResult, normilizeItem } from './helpers';
 
 export default class Cart implements ICart {
   props: IProps;
@@ -52,15 +52,16 @@ export default class Cart implements ICart {
         });
   }
   
-  addItem(item: IOrderItem) {
+  addItem(item: IOrderItemUnnormalized) {
     const foundItem = this.items.find(findItem => findItem.id === item.id);
     if (foundItem) {
-        this.addItemCount(item.id);
-        return item;
+        this.addItemCount(foundItem.id);
+        return foundItem;
     }
-    this.items.push(item);
+    const normilizedItem = normilizeItem(item);
+    this.items.push(normilizedItem);
     this.update();
-    return item;
+    return normilizedItem;
   }
 
   addItemCount(id: OrderItemIDType, count: number = 1) {

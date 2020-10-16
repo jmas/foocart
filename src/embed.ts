@@ -1,5 +1,4 @@
-import { IProps, IOrder, IOutput, ITranslation, ICart, IOrderItem } from './types';
-import shorthash from 'shorthash';
+import { IProps, IOrder, IOutput, ITranslation, ICart, IOrderItemUnnormalized } from './types';
 import render from './render';
 import { fetchTranslation, createOrderResult, makeGScriptRequest } from './helpers';
 import Cart from './cart';
@@ -52,19 +51,20 @@ export default function embed(id: string = 'foocart', props?: IProps): Promise<I
             document.body.addEventListener('click', (event: Event) => {
                 if (event.target instanceof HTMLElement && event.target.dataset.foocartUrl !== undefined) {
                     event.preventDefault();
-                    const name = (event.target.dataset.foocartName || event.target.innerText).trim();
-                    const url = (event.target.dataset.foocartUrl || '').trim();
-                    const image = (event.target.dataset.foocartImage || '').trim();
-                    const id = event.target.dataset.foocartId || shorthash.unique(`${name}#${url}`);
-                    const price = parseInt(event.target.dataset.foocartPrice || '0', 10);
+                    const id = event.target.dataset.foocartId;
+                    const name = event.target.dataset.foocartName;
+                    const url = event.target.dataset.foocartUrl;
+                    const image = event.target.dataset.foocartImage;
+                    const price = event.target.dataset.foocartPrice;
+                    const count = event.target.dataset.foocartCount;
                     const item = {
                         id,
                         name,
                         price,
                         url,
                         image,
-                        count: 1
-                    } as IOrderItem;
+                        count
+                    } as IOrderItemUnnormalized;
                     cart.addItem(item);
                 }
             });

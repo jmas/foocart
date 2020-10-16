@@ -1,4 +1,5 @@
-import { IOrderResult, ITranslation } from './types';
+import { IOrderResult, ITranslation, IOrderItem, IOrderItemUnnormalized } from './types';
+import shorthash from 'shorthash';
 // @todo resolve with dynamic imports (but could be issues with rollup)
 import enTranslation from './translations/en.json';
 import uaTranslation from './translations/ua.json';
@@ -50,4 +51,21 @@ export function makeGScriptRequest(url: string, data: any): Promise<any> {
         };
         document.body.appendChild(script);
     });
+}
+
+export function normilizeItem(item: IOrderItemUnnormalized): IOrderItem {
+    const name = (item.name || '').trim();
+    const url = (item.url || '').trim();
+    const image = (item.image || '').trim();
+    const id = (item.id || shorthash.unique(`${name}#${url}`)).trim();
+    const price = parseInt(String(item.price || '0'), 10);
+    const count = parseInt(String(item.count || '1'), 10);
+    return {
+        id,
+        name,
+        url,
+        count,
+        image,
+        price
+    };
 }

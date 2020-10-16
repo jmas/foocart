@@ -17,6 +17,15 @@ export interface IOrder {
   telephone: string
 };
 
+export interface IOrderItemUnnormalized {
+  id?: string,
+  name?: string,
+  url?: string,
+  count?: string | number,
+  image?: string,
+  price?: string | number
+};
+
 export interface IOrderItem {
   id: string,
   name: string,
@@ -58,7 +67,7 @@ export interface ICart {
   section: SectionType,
   update(): void,
   completeOrder(order: IOrder): void,
-  addItem(item: IOrderItem): IOrderItem,
+  addItem(item: IOrderItemUnnormalized): IOrderItem,
   addItemCount(id: OrderItemIDType, count?: number): void,
   removeItem(id: OrderItemIDType): void,
   removeItemCount(id: OrderItemIDType, count?: number): void,

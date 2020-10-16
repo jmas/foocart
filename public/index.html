@@ -30,6 +30,16 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
 
+    <script>
+      window.__foocartCallback = function(cart) {
+        cart.addItem({
+          id: '10',
+          name: 'Foo',
+          price: 10
+        });
+      };
+    </script>
+
     <a
       href="/fooproduct1.html"
       data-foocart-price="100"
