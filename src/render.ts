@@ -1,5 +1,5 @@
 import { html, render as litRender } from 'lit-html';
-import { ICart, IOrder, IOutput, ITranslation, OrderItemIDType, SectionType, IFieldProps, ITextFieldProps, ITextareaFieldProps } from './types';
+import { ICart, IOrder, IOutput, ITranslation, OrderItemIDType, SectionType, IFieldProps, ITextFieldProps, ITextareaFieldProps, IDialogProps } from './types';
 import styles from './styles.module.css';
 
 export default function render(cart: ICart, output: IOutput, translation: ITranslation, element: HTMLElement, priceTemplate: string) {
@@ -50,73 +50,91 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
     litRender(html`
         <div class=${styles.cart}>
             ${cart.section === SectionType.BUTTON ? html`
-                <button
-                    type="button"
-                    @click=${handleCartButtonClick}
-                    class=${styles.cartButton}
-                >
-                    <span>${output.items.length}</span>
-                </button>
-            ` : cart.section === SectionType.CART ? html`
-                <div>
-                    ${output.items.length > 0 ? output.items.map(item => html`
-                        <div key=${item.id}>
-                            <div><b>${item.name}</b></div>
-                            <div>
-                                <span>${translation.count}: <b>${item.count}</b></span>
-                                <span>${translation.price}: <b>${formatPrice(item.price)}</b></span>
-                            </div>
-                            <div>
-                                <button type="button" @click=${() => handleAddItemClick(item.id)}>${translation.addItem}</button>
-                                <button type="button" @click=${() => handleRemoveItemClick(item.id)}>${translation.removeItem}</button>
-                            </div>
-                        </div>
-                    `) : (html`
-                        <div>${translation.nothingHere}</div>
-                    `)}
-                </div>
-                <button type="button" @click=${handleMakeOrderClick} ?disabled=${output.items.length === 0}>${translation.makeOrder} (${formatPrice(output.totalPrice)})</button>
-                <button type="button" @click=${handleCloseClick}>${translation.close}</button>
-            ` : cart.section === SectionType.ORDER ? html`
-                <form @submit=${handleOrderSubmit}>
-                    ${output.orderResult.message ? html`<div>${output.orderResult.message}</div>` : null}
-                    ${textField({
-                        label: translation.name,
-                        name: 'name',
-                        error: output.orderResult.errors?.name
-                    })}
-                    ${textField({
-                        label: translation.surname,
-                        name: 'surname',
-                        error: output.orderResult.errors?.surname
-                    })}
-                    ${textField({
-                        label: translation.telephone,
-                        name: 'telephone',
-                        type: 'tel',
-                        error: output.orderResult.errors?.telephone
-                    })}
-                    ${textField({
-                        label: translation.email,
-                        name: 'email',
-                        error: output.orderResult.errors?.email
-                    })}
-                    ${textareaField({
-                        label: translation.comment,
-                        name: 'comment',
-                        error: output.orderResult.errors?.comment
-                    })}
-                    <button type="submit" ?disabled=${output.orderResult.pending}>
-                        ${translation.approveOrder} (${formatPrice(output.totalPrice)})
+                ${output.items.length > 0 ? html`
+                    <button
+                        type="button"
+                        @click=${handleCartButtonClick}
+                        class=${styles.cartButton}
+                    >
+                        <span>${output.items.length}</span>
                     </button>
-                </form>
-                <button type="button" @click=${handleCloseClick}>${translation.close}</button>
-            ` : cart.section === SectionType.COMPLETE ? html`
-                <div>
-                    ${translation.orderCompleted}
-                </div>
-                <button type="button" @click=${handleCloseClick}>${translation.close}</button>
-            ` : null}
+                ` : null}
+            ` : cart.section === SectionType.CART ? dialog({
+                content: html`
+                    <div class=${styles.items}>
+                        ${output.items.length > 0 ? output.items.map(item => html`
+                            <div key=${item.id} class=${styles.item}>
+                                ${item.image ? html`
+                                    <img class=${styles.itemImage} src=${item.image} />
+                                ` : null}
+                                <div class=${styles.itemSummary}>
+                                    <div class=${styles.itemName}>${item.name}</div>
+                                    <div class=${styles.itemInfo}>
+                                        <span>${translation.count}: <b>${item.count}</b></span>
+                                        <span>${translation.price}: <b>${formatPrice(item.price)}</b></span>
+                                    </div>
+                                    <div class=${styles.itemActions}>
+                                        <button class=${styles.itemAction} type="button" @click=${() => handleAddItemClick(item.id)}>${translation.addItem}</button>
+                                        <button class=${styles.itemAction} type="button" @click=${() => handleRemoveItemClick(item.id)}>${translation.removeItem}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `) : (html`
+                            <div class=${styles.empty}>${translation.nothingHere}</div>
+                        `)}
+                    </div>
+                    <button class=${styles.bigButton} type="button" @click=${handleMakeOrderClick} ?disabled=${output.items.length === 0}>
+                        ${translation.makeOrder} (${formatPrice(output.totalPrice)})
+                    </button>
+                `,
+                translation,
+                onClose: handleCloseClick
+            }) : cart.section === SectionType.ORDER ? dialog({
+                content: html`
+                    <form @submit=${handleOrderSubmit}>
+                        ${output.orderResult.message ? html`<div>${output.orderResult.message}</div>` : null}
+                        ${textField({
+                            label: translation.name,
+                            name: 'name',
+                            error: output.orderResult.errors?.name
+                        })}
+                        ${textField({
+                            label: translation.surname,
+                            name: 'surname',
+                            error: output.orderResult.errors?.surname
+                        })}
+                        ${textField({
+                            label: translation.telephone,
+                            name: 'telephone',
+                            type: 'tel',
+                            error: output.orderResult.errors?.telephone
+                        })}
+                        ${textField({
+                            label: translation.email,
+                            name: 'email',
+                            error: output.orderResult.errors?.email
+                        })}
+                        ${textareaField({
+                            label: translation.comment,
+                            name: 'comment',
+                            error: output.orderResult.errors?.comment
+                        })}
+                        <button type="submit" ?disabled=${output.orderResult.pending}>
+                            ${translation.approveOrder} (${formatPrice(output.totalPrice)})
+                        </button>
+                    </form>
+                `,
+                translation,
+                onClose: handleCloseClick
+            }): cart.section === SectionType.COMPLETE ?  dialog({
+                content: html`
+                    <div>
+                        ${translation.orderCompleted}
+                    </div>
+                `,
+                translation,
+                onClose: handleCloseClick
+            }) : null}
         </div>
     `, element);
 }
@@ -143,4 +161,13 @@ function textareaField(props: ITextareaFieldProps) {
         ...props,
         input: html`<textarea name=${props.name}></textarea>`
     });
+}
+
+function dialog(props: IDialogProps) {
+    return html`
+        <div class=${styles.dialog}>
+            ${props.content}
+            <button type="button" @click=${props.onClose} class=${styles.dialogClose} aria-label=${props.translation.close}>&times;</button>
+        </div>
+    `;
 }

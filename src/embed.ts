@@ -54,6 +54,7 @@ export default function embed(id: string = 'foocart', props?: IProps): Promise<I
                     event.preventDefault();
                     const name = event.target.dataset.foocartName || '';
                     const url = event.target.dataset.foocartUrl || '';
+                    const image = event.target.dataset.foocartImage || '';
                     const id = event.target.dataset.foocartId || shorthash.unique(`${name}#${url}`);
                     const price = parseInt(event.target.dataset.foocartPrice || '0', 10);
                     const item = {
@@ -61,6 +62,7 @@ export default function embed(id: string = 'foocart', props?: IProps): Promise<I
                         name,
                         price,
                         url,
+                        image,
                         count: 1
                     } as IOrderItem;
                     cart.addItem(item);

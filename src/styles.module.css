@@ -1,7 +1,17 @@
+@keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 50px rgba(207, 207, 207, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(207, 207, 207, 0);
+    }
+}
+
 .cart {
     position: fixed;
     top: 50px;
     right: 50px;
+    font-family: sans-serif;
 }
 
 .cartButton {
@@ -9,13 +19,14 @@
     width: 70px;
     height: 70px;
     background-color: #66D17E;
-    background-image: url("data:image/svg+xml,%0A%3Csvg width='35' height='35' viewBox='0 0 35 35' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.302 26.1618C10.8653 26.1618 8.88286 28.1442 8.88286 30.5809C8.88286 33.0176 10.8653 35 13.302 35C15.7387 35 17.7211 33.0176 17.7211 30.5809C17.7211 28.1442 15.7387 26.1618 13.302 26.1618ZM13.302 32.3485C12.3271 32.3485 11.5344 31.5558 11.5344 30.5809C11.5344 29.606 12.3271 28.8133 13.302 28.8133C14.2764 28.8133 15.0696 29.606 15.0696 30.5809C15.0696 31.5557 14.2769 32.3485 13.302 32.3485Z' fill='white'/%3E%3Cpath d='M26.3826 26.1618C23.9458 26.1618 21.9634 28.1442 21.9634 30.5809C21.9634 33.0176 23.9458 35 26.3826 35C28.8193 35 30.8017 33.0176 30.8017 30.5809C30.8017 28.1442 28.8193 26.1618 26.3826 26.1618ZM26.3826 32.3485C25.4077 32.3485 24.6149 31.5558 24.6149 30.5809C24.6149 29.606 25.4077 28.8133 26.3826 28.8133C27.3574 28.8133 28.1502 29.606 28.1502 30.5809C28.1502 31.5557 27.3574 32.3485 26.3826 32.3485Z' fill='white'/%3E%3Cpath d='M34.0488 8.63196C33.7969 8.31553 33.4151 8.1313 33.0112 8.1313H9.79763L8.59253 2.04084C8.48692 1.50744 8.06624 1.0925 7.53105 0.994403L2.2281 0.0221996C1.5065 -0.110827 0.817098 0.366935 0.68496 1.08723C0.552822 1.80753 1.02963 2.49823 1.74999 2.63037L6.16647 3.43995L10.0571 23.1046C10.1799 23.7255 10.7248 24.1731 11.3576 24.1731H29.9179C30.5352 24.1731 31.0704 23.7476 31.2096 23.1452L34.303 9.75531C34.394 9.36156 34.3003 8.94792 34.0488 8.63196ZM28.8635 21.5217H12.4464L10.3222 10.7832H31.3439L28.8635 21.5217Z' fill='white'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%0A%3Csvg width='29' height='30' viewBox='0 0 29 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 12.19L2.81004 27.3878C3.07662 28.8878 4.37369 29.9854 5.89711 30H22.6781C24.2016 29.9854 25.4986 28.8879 25.7652 27.3878L28.5752 12.19H0ZM9.14251 18.9974C9.14251 19.4346 8.78813 19.789 8.35095 19.789C7.91377 19.789 7.55939 19.4346 7.55939 18.9974V16.6227C7.55939 16.1856 7.91377 15.8312 8.35095 15.8312C8.78813 15.8312 9.14251 16.1856 9.14251 16.6227V18.9974ZM21.0159 18.9974C21.0159 19.4346 20.6615 19.789 20.2243 19.789C19.7872 19.789 19.4328 19.4346 19.4328 18.9974V16.6227C19.4328 16.1856 19.7872 15.8312 20.2243 15.8312C20.6615 15.8312 21.0159 16.1856 21.0159 16.6227V18.9974Z' fill='white'/%3E%3Cpath d='M9.14251 6.72821C9.14251 3.88666 11.4461 1.58312 14.2876 1.58312C17.1292 1.58312 19.4327 3.88666 19.4327 6.72821V11.3984H21.0158V6.72821C21.0159 3.0123 18.0035 0 14.2876 0C10.5717 0 7.55939 3.0123 7.55939 6.72821V11.3984H9.14251V6.72821Z' fill='white'/%3E%3C/svg%3E%0A");
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 100%;
-    border: 1px solid rgba(0,0,0,.2);
+    border: 1px solid rgba(0,0,0,.1);
     cursor: pointer;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 0 0 rgba(207, 207, 207, .5);
+    animation: pulse 3s infinite;
 }
 
 .cartButton:focus {
@@ -26,12 +37,147 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
     text-align: center;
     background-color: #FF0000;
     border-radius: 100%;
     color: #fff;
     font-weight: bold;
+    font-size: 10px;
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.bigButton {
+    height: 60px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 0 0 10px 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    background-color: #66D17E;
+}
+
+.bigButton:disabled {
+    background-color: #565656;
+    cursor: default;
+}
+
+.dialog {
+    position: relative;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.dialogClose {
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    width: 26px;
+    height: 26px;
+    background-color: #565656;
+    border-radius: 100%;
+    border: 1px solid rgba(0,0,0,.1);
+    color: #fff;
+    background-image: url("data:image/svg+xml,%0A%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.43427 5L10 8.56573L8.56573 10L5 6.43427L1.43427 10L0 8.56573L3.56573 5L0 1.43427L1.43427 0L5 3.56573L8.56573 0L10 1.43427L6.43427 5Z' fill='white'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: center;
+    text-indent: 10000px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.dialogClose:focus {
+    outline: none;
+}
+
+.empty {
+    padding: 40px;
+    text-align: center;
+    color: #565656;
+}
+
+.items {
+    display: grid;
+    max-height: calc(100vh - 60px - 100px);
+    overflow: auto;
+}
+
+.items > .item {
+    padding: 20px;
+    border: 1px solid #F1F1F1;
+    margin-top: -1px;
+}
+
+.items > .item:first-child {
+    border-radius: 10px 10px 0 0;
+    margin-top: 0;
+}
+
+.items > .item:last-child {
+    border-bottom: none;
+}
+
+.item {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+}
+
+.itemImage {
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(0,0,0,.1);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    overflow: hidden;
+    object-fit: contain;
+}
+
+.itemSummary {
+    display: grid;
+    gap: 10px;
+    align-content: center;
+}
+
+.itemName {
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+}
+
+.itemInfo {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 20px;
+    font-size: 14px;
+    color: #565656;
+}
+
+.itemActions {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 20px;
+}
+
+.itemAction {
+    display: block;
+    border: none;
+    padding: 0;
+    background: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    color: #000000;
+    outline: none;
 }

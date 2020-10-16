@@ -22,6 +22,7 @@ export interface IOrderItem {
   name: string,
   url: string,
   count: number,
+  image: string,
   price: number
 };
 
@@ -79,3 +80,9 @@ export interface ITextFieldProps extends IFieldProps {
 };
 
 export interface ITextareaFieldProps extends IFieldProps {};
+
+export interface IDialogProps {
+  content: TemplateResult,
+  translation: ITranslation,
+  onClose(): void;
+};
