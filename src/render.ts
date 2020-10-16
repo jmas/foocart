@@ -91,35 +91,39 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
                 onClose: handleCloseClick
             }) : cart.section === SectionType.ORDER ? dialog({
                 content: html`
-                    <form @submit=${handleOrderSubmit}>
-                        ${output.orderResult.message ? html`<div>${output.orderResult.message}</div>` : null}
-                        ${textField({
-                            label: translation.name,
-                            name: 'name',
-                            error: output.orderResult.errors?.name
-                        })}
-                        ${textField({
-                            label: translation.surname,
-                            name: 'surname',
-                            error: output.orderResult.errors?.surname
-                        })}
-                        ${textField({
-                            label: translation.telephone,
-                            name: 'telephone',
-                            type: 'tel',
-                            error: output.orderResult.errors?.telephone
-                        })}
-                        ${textField({
-                            label: translation.email,
-                            name: 'email',
-                            error: output.orderResult.errors?.email
-                        })}
-                        ${textareaField({
-                            label: translation.comment,
-                            name: 'comment',
-                            error: output.orderResult.errors?.comment
-                        })}
-                        <button type="submit" ?disabled=${output.orderResult.pending}>
+                    <form class=${styles.orderForm} @submit=${handleOrderSubmit}>
+                        <div class=${styles.orderFormContent}>
+                            ${output.orderResult.message ? html`<div>${output.orderResult.message}</div>` : null}
+                            <div class=${styles.orderFormFields}>
+                                ${textField({
+                                    label: translation.name,
+                                    name: 'name',
+                                    error: output.orderResult.errors?.name
+                                })}
+                                ${textField({
+                                    label: translation.surname,
+                                    name: 'surname',
+                                    error: output.orderResult.errors?.surname
+                                })}
+                                ${textField({
+                                    label: translation.telephone,
+                                    name: 'telephone',
+                                    type: 'tel',
+                                    error: output.orderResult.errors?.telephone
+                                })}
+                                ${textField({
+                                    label: translation.email,
+                                    name: 'email',
+                                    error: output.orderResult.errors?.email
+                                })}
+                                ${textareaField({
+                                    label: translation.comment,
+                                    name: 'comment',
+                                    error: output.orderResult.errors?.comment
+                                })}
+                            </div>
+                        </div>
+                        <button class=${styles.bigButton} type="submit" ?disabled=${output.orderResult.pending}>
                             ${translation.approveOrder} (${formatPrice(output.totalPrice)})
                         </button>
                     </form>
@@ -141,10 +145,10 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
 
 function field(props: IFieldProps) {
     return html`
-        <div>
-            <label>${props.label}</label>
-            ${props.input}
-            ${props.error ? html`<div>${props.error}</div>` : null}
+        <div class=${styles.field}>
+            <label class=${styles.fieldLabel}>${props.label}</label>
+            <div class=${styles.fieldInput}>${props.input}</div>
+            ${props.error ? html`<div class=${styles.fieldError}>${props.error}</div>` : null}
         </div>
     `;
 }
@@ -152,14 +156,14 @@ function field(props: IFieldProps) {
 function textField(props: ITextFieldProps) {
     return field({
         ...props,
-        input: html`<input type=${props.type || 'text'} name=${props.name} />`
+        input: html`<input type=${props.type || 'text'} name=${props.name} class=${styles.inputText} />`
     });
 }
 
 function textareaField(props: ITextareaFieldProps) {
     return field({
         ...props,
-        input: html`<textarea name=${props.name}></textarea>`
+        input: html`<textarea name=${props.name} class=${styles.textarea}></textarea>`
     });
 }
 

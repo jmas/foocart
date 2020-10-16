@@ -14,6 +14,10 @@
     font-family: sans-serif;
 }
 
+.cart * {
+    box-sizing: border-box;
+}
+
 .cartButton {
     position: relative;
     width: 70px;
@@ -181,4 +185,68 @@
     font-size: 14px;
     color: #000000;
     outline: none;
+}
+
+.orderFormContent {
+    border: 1px solid #F1F1F1;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+}
+
+.orderFormFields {
+    display: grid;
+    grid-template-areas: "field1 field2" "field3 field4" "field5 field5";
+    gap: 20px;
+    min-width: 600px;
+}
+
+.orderFormFields > *:nth-child(1) {
+    grid-area: field1;
+}
+
+.orderFormFields > *:nth-child(2) {
+    grid-area: field2;
+}
+
+.orderFormFields > *:nth-child(3) {
+    grid-area: field3;
+}
+
+.orderFormFields > *:nth-child(4) {
+    grid-area: field4;
+}
+
+.orderFormFields > *:nth-child(5) {
+    grid-area: field5;
+}
+
+.field {
+    display: grid;
+    gap: 5px;
+}
+
+.fieldError {
+    color: #FF0000;
+}
+
+.inputText {
+    width: 100%;
+    border: 1px solid #B4B4B4;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.textarea {
+    width: 100%;
+    border: 1px solid #B4B4B4;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 100px;
+    padding: 10px;
 }
