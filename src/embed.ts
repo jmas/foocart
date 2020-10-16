@@ -52,7 +52,7 @@ export default function embed(id: string = 'foocart', props?: IProps): Promise<I
             document.body.addEventListener('click', (event: Event) => {
                 if (event.target instanceof HTMLElement && event.target.dataset.foocartUrl !== undefined) {
                     event.preventDefault();
-                    const name = event.target.dataset.foocartName || '';
+                    const name = event.target.dataset.foocartName || event.target.innerText.trim();
                     const url = event.target.dataset.foocartUrl || '';
                     const image = event.target.dataset.foocartImage || '';
                     const id = event.target.dataset.foocartId || shorthash.unique(`${name}#${url}`);
