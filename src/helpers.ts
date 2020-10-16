@@ -58,7 +58,7 @@ export function normilizeItem(item: IOrderItemUnnormalized): IOrderItem {
     const url = (item.url || '').trim();
     const image = (item.image || '').trim();
     const id = (item.id || shorthash.unique(`${name}#${url}`)).trim();
-    const price = parseInt(String(item.price || '0'), 10);
+    const price = parseFloat(String(item.price || '0'));
     const count = parseInt(String(item.count || '1'), 10);
     return {
         id,
