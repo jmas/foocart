@@ -95,28 +95,28 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
                         <div class=${styles.orderFormContent}>
                             ${output.orderResult.message ? html`<div>${output.orderResult.message}</div>` : null}
                             <div class=${styles.orderFormFields}>
-                                ${textField({
+                                ${textInput({
                                     label: translation.name,
                                     name: 'name',
                                     error: output.orderResult.errors?.name
                                 })}
-                                ${textField({
+                                ${textInput({
                                     label: translation.surname,
                                     name: 'surname',
                                     error: output.orderResult.errors?.surname
                                 })}
-                                ${textField({
+                                ${textInput({
                                     label: translation.telephone,
                                     name: 'telephone',
                                     type: 'tel',
                                     error: output.orderResult.errors?.telephone
                                 })}
-                                ${textField({
+                                ${textInput({
                                     label: translation.email,
                                     name: 'email',
                                     error: output.orderResult.errors?.email
                                 })}
-                                ${textareaField({
+                                ${textareaInput({
                                     label: translation.comment,
                                     name: 'comment',
                                     error: output.orderResult.errors?.comment
@@ -132,7 +132,7 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
                 onClose: handleCloseClick
             }): cart.section === SectionType.COMPLETE ?  dialog({
                 content: html`
-                    <div>
+                    <div class=${styles.orderCompleted}>
                         ${translation.orderCompleted}
                     </div>
                 `,
@@ -145,7 +145,7 @@ export default function render(cart: ICart, output: IOutput, translation: ITrans
 
 function field(props: IFieldProps) {
     return html`
-        <div class=${styles.field}>
+        <div class=${`${styles.field} ${props.error ? 'hasError' : ''}`}>
             <label class=${styles.fieldLabel}>${props.label}</label>
             <div class=${styles.fieldInput}>${props.input}</div>
             ${props.error ? html`<div class=${styles.fieldError}>${props.error}</div>` : null}
@@ -153,17 +153,17 @@ function field(props: IFieldProps) {
     `;
 }
 
-function textField(props: ITextFieldProps) {
+function textInput(props: ITextFieldProps) {
     return field({
         ...props,
-        input: html`<input type=${props.type || 'text'} name=${props.name} class=${styles.inputText} />`
+        input: html`<input type=${props.type || 'text'} name=${props.name} class=${styles.textInput} />`
     });
 }
 
-function textareaField(props: ITextareaFieldProps) {
+function textareaInput(props: ITextareaFieldProps) {
     return field({
         ...props,
-        input: html`<textarea name=${props.name} class=${styles.textarea}></textarea>`
+        input: html`<textarea name=${props.name} class=${styles.textareaInput}></textarea>`
     });
 }
 

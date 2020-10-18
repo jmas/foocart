@@ -132,7 +132,7 @@
 
 .item {
     display: grid;
-    grid-auto-flow: column;
+    grid-template-columns: auto 1fr;
     gap: 10px;
 }
 
@@ -220,16 +220,7 @@
     grid-area: field5;
 }
 
-.field {
-    display: grid;
-    gap: 5px;
-}
-
-.fieldError {
-    color: #FF0000;
-}
-
-.inputText {
+.textInput {
     width: 100%;
     border: 1px solid #B4B4B4;
     font-family: sans-serif;
@@ -239,7 +230,7 @@
     padding: 10px;
 }
 
-.textarea {
+.textareaInput {
     width: 100%;
     border: 1px solid #B4B4B4;
     font-family: sans-serif;
@@ -249,4 +240,36 @@
     resize: vertical;
     min-height: 100px;
     padding: 10px;
+}
+
+.field {
+    display: grid;
+    gap: 5px;
+    align-content: start;
+}
+
+.fieldLabel {
+    font-weight: bold;
+}
+
+.fieldInput {}
+
+.field:global(.hasError) .fieldInput > *:first-child,
+.field:global(.hasError) .fieldInput > *:first-child {
+    border-color: #FF0000;
+}
+
+.fieldError {
+    color: #FF0000;
+}
+
+.orderCompleted {
+    min-width: 600px;
+    height: 300px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    color: #66D17E;
+    font-size: 24px;
+    font-weight: bold;
 }

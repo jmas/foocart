@@ -12,7 +12,7 @@ export default function embed(id: string = 'foocart', props?: IProps): Promise<I
     }
     
     // parse config from element attributes
-    const translationId = element.dataset.translation || 'en';
+    const lang = element.dataset.lang || 'en';
     // eslint-disable-next-line no-template-curly-in-string
     const priceTemplate = element.dataset.priceTemplate || '${price}';
     const completeUrl = element.dataset.completeUrl || '';
@@ -22,7 +22,7 @@ export default function embed(id: string = 'foocart', props?: IProps): Promise<I
     }
     
     // prepare translation
-    return fetchTranslation(translationId)
+    return fetchTranslation(lang)
         .then((translation: ITranslation) => {
             const defaultProps = {
                 priceTemplate,

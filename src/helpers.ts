@@ -22,17 +22,17 @@ export function createOrderResult(result: { [key: string]: any } = {}): IOrderRe
     };
 }
 
-export function fetchTranslation(translationId: string): Promise<ITranslation> {
-    if (translationId === 'en') {
-        return Promise.resolve(enTranslation as any);
+export function fetchTranslation(lang: string): Promise<ITranslation> {
+    if (lang === 'en') {
+        return Promise.resolve(enTranslation as ITranslation);
     }
-    if (translationId === 'ua') {
-        return Promise.resolve(uaTranslation as any);
+    if (lang === 'ua') {
+        return Promise.resolve(uaTranslation as ITranslation);
     }
-    if (translationId === 'ru') {
-        return Promise.resolve(ruTranslation as any);
+    if (lang === 'ru') {
+        return Promise.resolve(ruTranslation as ITranslation);
     }
-    return Promise.resolve({} as ITranslation);
+    return Promise.resolve(enTranslation as ITranslation);
 }
 
 export function makeGScriptRequest(url: string, data: any): Promise<any> {
