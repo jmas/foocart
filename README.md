@@ -7,11 +7,14 @@ The strong sides of widget is:
 * It very easy to start using it - just put few lines of HTML code
 * It have open source code - so you can take it and extend or ask for changes
 
+[See how it works](https://drive.google.com/file/d/1vVwMlqcb6GRFhG1uCRcAvQD5Hb561eQM/view?usp=sharing).
+
 ## How start using FooCart?
 
 1. Copy [Google FooCart Table](https://docs.google.com/spreadsheets/d/1UVQQTNUIaUxZyBc1gjBgqGaf9EuU5Onorn3wqybeFz4/edit)
-2. Publish Script: open menu **Instruments > Script editor > Publish > Deploy as web app** and copy App URL
-3. See next section 'Embed FooCart to web page'
+2. Publish Script: open menu **Instruments > Script editor**
+3. Change `EMAIL_ADDRESS` to yours email address and press **Publish > Deploy as web app** and copy App URL
+4. See next section 'Embed FooCart to web page'
 
 ## Embed FooCart to web page
 
