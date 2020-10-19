@@ -26,8 +26,7 @@
     "build": "react-scripts build",
     "dist": "rollup -c",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "publish": "npm version minor && npm publish"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
