@@ -1,9 +1,6 @@
 import { IOrderResult, ITranslation, IOrderItem, IOrderItemUnnormalized } from './types';
 import shorthash from 'shorthash';
-// @todo resolve with dynamic imports (but could be issues with rollup)
-import enTranslation from './translations/en.json';
-import uaTranslation from './translations/ua.json';
-import ruTranslation from './translations/ru.json';
+import defaultLocale from './locales/en.json';
 
 export function createOrderResult(result: { [key: string]: any } = {}): IOrderResult {
     const {
@@ -23,16 +20,13 @@ export function createOrderResult(result: { [key: string]: any } = {}): IOrderRe
 }
 
 export function fetchTranslation(lang: string): Promise<ITranslation> {
-    if (lang === 'en') {
-        return Promise.resolve(enTranslation as ITranslation);
-    }
     if (lang === 'ua') {
-        return Promise.resolve(uaTranslation as ITranslation);
+        return import('./locales/ua.json').then(result => result.default as ITranslation);
     }
     if (lang === 'ru') {
-        return Promise.resolve(ruTranslation as ITranslation);
+        return import('./locales/ru.json').then(result => result.default as ITranslation);
     }
-    return Promise.resolve(enTranslation as ITranslation);
+    return Promise.resolve(defaultLocale as ITranslation);
 }
 
 export function makeGScriptRequest(url: string, data: any): Promise<any> {

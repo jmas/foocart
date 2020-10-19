@@ -4,8 +4,6 @@
   "private": false,
   "module": "dist/index.es.js",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "browser": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -28,7 +26,8 @@
     "build": "react-scripts build",
     "dist": "rollup -c",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish": "npm version minor && npm publish"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "rollup-plugin-styles": "^3.11.0"
   }
 }
